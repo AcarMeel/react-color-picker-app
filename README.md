@@ -5,7 +5,8 @@
 Material UI - https://material-ui.com/  
 Chroma.js - https://gka.github.io/chroma.js/  
 React Slider - https://github.com/react-component/slider  
-Emoji Mart - https://github.com/missive/emoji-mart   
+Emoji Mart - https://github.com/missive/emoji-mart  
+React Router   
 
 
 ### npm start
