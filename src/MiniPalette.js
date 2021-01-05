@@ -6,6 +6,7 @@ const styles = {
     backgroundColor: "white",
     border: "1px solid black",
     borderRadius: "5px",
+    padding: '0.5rem',
     position: "relative",
     overflow: "hidden",
     "&:hover": {
@@ -13,7 +14,11 @@ const styles = {
     },
   },
   colors: {
-    backgroundColor: "grey",
+    backgroundColor: "#dae1e4",
+    width: '100%',
+    height: '150px',
+    borderRadius: '5px',
+    overflow: 'hidden'
   },
   title: {
     position: "re;ative",
@@ -26,16 +31,31 @@ const styles = {
     fontSize: "1rem",
   },
   emoji: {
-      marginLeft: '0.5rem',
-      fontSize: '1.5rem'
+    marginLeft: "0.5rem",
+    fontSize: "1.5rem",
+  },
+  miniColor: {
+      position: 'relative',
+      display: 'inline-block',
+      width: '20%',
+      height: '25%',
+      margin: '0 auto',
+      marginBottom: '-3.5px'
   },
 };
 
-const MiniPalette = ({ classes, paletteName, emoji }) => {
+const MiniPalette = ({ classes, paletteName, emoji, colors }) => {
+  const miniColorBoxes = colors.map((color) => (
+    <div
+      key={`${color.color}${color.name}`}
+      className={classes.miniColor}
+      style={{ backgroundColor: color.color }}
+    ></div>
+  ));
   return (
     <>
       <div className={classes.root}>
-        <div className={classes.colors}></div>
+        <div className={classes.colors}>{miniColorBoxes}</div>
         <h5 className={classes.title}>
           {paletteName} <span className={classes.emoji}>{emoji}</span>
         </h5>
