@@ -14,11 +14,12 @@ export default class App extends Component {
     return (
       <Switch>
         <Route exact path='/' render={(routeProps) => <PaletteList palettes={seedColors} {...routeProps} /> } />
-        <Route path='/palette/:id' 
+        <Route exact path='/palette/:id' 
           render={routeProps => (
             <Palette palette={generatePalette(this.findPalette(routeProps.match.params.id))} />
           )}
         />
+        <Route path='/palette/:paletteId/:colorId' render={() => <h1>Lalala</h1>} />
       </Switch>
     );
   }
