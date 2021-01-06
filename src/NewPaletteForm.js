@@ -23,7 +23,8 @@ class NewPaletteForm extends Component {
     super(props);
     this.state = {
       open: true,
-      colors: seedColors[0].colors
+      colors: seedColors[0].colors,
+      currentColor: 'deeppink'
     };
     this.addNewColor = this.addNewColor.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -31,6 +32,7 @@ class NewPaletteForm extends Component {
     this.removeColor = this.removeColor.bind(this);
     this.clearColors = this.clearColors.bind(this);
     this.addRandomColor = this.addRandomColor.bind(this);
+    this.updateCurrentColor = this.updateCurrentColor.bind(this);
   }
 
   handleDrawerOpen = () => {
@@ -42,8 +44,12 @@ class NewPaletteForm extends Component {
   };
 
   addNewColor(newColor) {
+    const newColors = {
+        color: this.state.currentColor,
+        name: this.state.currentColor
+      };
     this.setState({
-      colors: [...this.state.colors, newColor],
+      colors: [...this.state.colors, newColors],
       newColorName: ""
     });
   }
@@ -86,9 +92,13 @@ class NewPaletteForm extends Component {
     // }));
   };
 
+  updateCurrentColor(newColor) {
+      this.setState({ currentColor: newColor.hex });
+  }
+
   render() {
     const { classes, maxColors, palettes } = this.props;
-    const { open, colors } = this.state;
+    const { open, colors, currentColor } = this.state;
     const paletteIsFull = colors.length >= maxColors;
 
     return (
@@ -142,8 +152,15 @@ class NewPaletteForm extends Component {
               addNewColor={this.addNewColor}
               colors={colors}
             /> */}
-            <ChromePicker  />
-            {/* onChangeComplete={(newColor) => console.log(newColor)} */}
+            <ChromePicker color={currentColor} onChangeComplete={this.updateCurrentColor} />
+            <Button
+                variant='contained'
+                color='primary'
+                style={{backgroundColor: currentColor}}
+                onClick={this.addNewColor}
+              >
+                Add Color
+              </Button>
           </div>
         </Drawer>
         <main
@@ -159,6 +176,11 @@ class NewPaletteForm extends Component {
             onSortEnd={this.onSortEnd}
             distance={20}
           /> */}
+          <ul>
+              {colors.map(color => (
+                  <li  style={{ backgroundColor: color.color }}>{color.name}</li>
+              ))}
+          </ul>
         </main>
       </div>
     );
