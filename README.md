@@ -10,6 +10,8 @@ React Slider - https://github.com/react-component/slider
 Emoji Mart - https://github.com/missive/emoji-mart  
 React Router  
 React Color - https://casesandberg.github.io/react-color/   
+Material-UI-Form-validator - https://github.com/NewOldMax/react-material-ui-form-validator  
+
 
 
 ### npm start
