@@ -4,7 +4,7 @@ import Slider from "rc-slider";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import Snackbar from "@material-ui/core/Snackbar";
-import IconButton from '@material-ui/core/IconButton';
+import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import "rc-slider/assets/index.css";
 import "./Navbar.css";
@@ -14,7 +14,7 @@ export default class Navbar extends Component {
     super(props);
     this.state = {
       format: "hex",
-      open: false
+      open: false,
     };
     this.handleFormatChange = this.handleFormatChange.bind(this);
     this.closeSnackbar = this.closeSnackbar.bind(this);
@@ -24,36 +24,38 @@ export default class Navbar extends Component {
     this.setState(
       {
         format: e.target.value,
-        open: true
+        open: true,
       },
       () => this.props.changeFormat(this.state.format)
     );
   }
 
   closeSnackbar() {
-      this.setState({ open: false });
+    this.setState({ open: false });
   }
 
   render() {
-    const { level, changeLevel } = this.props;
+    const { level, changeLevel, showingAllColors } = this.props;
     const { format, open } = this.state;
     return (
       <header className="Navbar">
         <div className="logo">
           <Link to="/">ReactColorPicker</Link>
         </div>
-        <div className="slider-container">
-          <span>Level: {level}</span>
-          <div className="slider">
-            <Slider
-              defaultValue={level}
-              min={100}
-              max={900}
-              step={100}
-              onAfterChange={changeLevel}
-            />
+        {showingAllColors && (
+          <div className="slider-container">
+            <span>Level: {level}</span>
+            <div className="slider">
+              <Slider
+                defaultValue={level}
+                min={100}
+                max={900}
+                step={100}
+                onAfterChange={changeLevel}
+              />
+            </div>
           </div>
-        </div>
+        )}
         <div className="select-container">
           <Select
             labelId="demo-simple-select-label"
@@ -74,12 +76,21 @@ export default class Navbar extends Component {
           onClose={this.closeSnackbar}
           open={open}
           autoHideDuration={6000}
-          message={<span className="message-id">Format Changed to {format.toUpperCase()}!</span>}
-          ContentProps={{'aria-describedby': 'message-id'}}
+          message={
+            <span className="message-id">
+              Format Changed to {format.toUpperCase()}!
+            </span>
+          }
+          ContentProps={{ "aria-describedby": "message-id" }}
           action={[
-              <IconButton onClick={this.closeSnackbar} color='inherit' key='close' aria-label='close'>
-                  <CloseIcon></CloseIcon>
-              </IconButton>
+            <IconButton
+              onClick={this.closeSnackbar}
+              color="inherit"
+              key="close"
+              aria-label="close"
+            >
+              <CloseIcon></CloseIcon>
+            </IconButton>,
           ]}
         />
       </header>
