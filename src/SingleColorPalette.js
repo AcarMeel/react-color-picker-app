@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import ColorBox from "./ColorBox";
 import Navbar from "./Navbar";
 import PaletteFooter from "./PaletteFooter";
@@ -13,7 +14,6 @@ export default class SingleColorPalette extends Component {
       format: "hex",
     };
     this.changeFormat = this.changeFormat.bind(this);
-    console.log(this._shades);
   }
 
   gatherShades(palette, colorToFilterBy) {
@@ -45,10 +45,18 @@ export default class SingleColorPalette extends Component {
       />
     ));
     return (
-      <div className="Palette">
+      <div className="SingleColorPalette Palette">
         <Navbar changeFormat={this.changeFormat} showingAllColors={false} />
-        <div className="Palette-colors">{colorBoxes}</div>
-        <PaletteFooter paletteName={palette.paletteName} emoji={palette.emoji} />
+        <div className="Palette-colors">
+          {colorBoxes}
+          <div className="go-back ColorBox">
+            <Link className="back-button" to={`/palette/${palette.id}`}>Go Back</Link>
+          </div>
+        </div>
+        <PaletteFooter
+          paletteName={palette.paletteName}
+          emoji={palette.emoji}
+        />
       </div>
     );
   }
