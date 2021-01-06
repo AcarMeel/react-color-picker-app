@@ -1,4 +1,4 @@
-#Video 190
+
 
 ### Color Picker App
 
@@ -8,7 +8,8 @@ Material UI - https://material-ui.com/
 Chroma.js - https://gka.github.io/chroma.js/  
 React Slider - https://github.com/react-component/slider  
 Emoji Mart - https://github.com/missive/emoji-mart  
-React Router   
+React Router  
+React Color - https://casesandberg.github.io/react-color/   
 
 
 ### npm start
